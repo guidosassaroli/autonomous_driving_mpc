@@ -1,4 +1,4 @@
-# MPC for Self Driving Cars
+# MPC for Self Driving Car
 Model Predictive Controller (MPC) for self driving car.
 
 ## Bicycle Model 
@@ -29,3 +29,7 @@ $\dot{y} = v_x sin(\phi)$
 $\dot{\delta} = v_{\delta}$  
 $\dot{v_x}= a_x$  
 $\dot{\phi}= \frac{v_x}{l_{wb}} tan(\delta)$  
+
+## Validation 
+
+## Model Predictive Controller 
