@@ -1,5 +1,5 @@
 # MPC for Self Driving Car
-Model Predictive Controller (MPC) for self driving car.
+Model Predictive Controller (MPC) for self driving car. Implemented using [Casadi](https://web.casadi.org/).  
 
 ## Bicycle Model 
 
