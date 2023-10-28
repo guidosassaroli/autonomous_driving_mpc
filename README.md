@@ -9,8 +9,9 @@ Model Predictive Controller (MPC) for self driving car.
 *phi* = yaw angle  
 *l_wb* = vehicle wheelbase  
 
-*v_delta* = _steering angle velocity of front wheels_  
-*a_x* = _longitudinal acceleration_  
+*v_delta* = steering angle velocity of front wheels  
+*a_x* = longitudinal acceleration  
+<img src="https://latex.codecogs.com/gif.latex? v_x =\text { longitudinal acceleration }  " /> 
 
 
 *x_dot = v_x * cos(phi)*  
