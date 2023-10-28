@@ -9,8 +9,8 @@ Model Predictive Controller (MPC) for self driving car.
 *phi* = yaw angle  
 *l_wb* = vehicle wheelbase  
 
-$ v_{\delta} $ = steering angle velocity of front wheels  
-$ a_x $ = longitudinal acceleration  
+$v_{\delta}$ = steering angle velocity of front wheels  
+$a_x$ = longitudinal acceleration  
 
 
 
