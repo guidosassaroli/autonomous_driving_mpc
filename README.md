@@ -3,6 +3,8 @@ Model Predictive Controller (MPC) for self driving car.
 
 ## Bicycle Model 
 
+The bicycle model is describe in the file *bicycle_model.py*. 
+
 States:  
 
 $x$ = x position in a global coordinate system  
