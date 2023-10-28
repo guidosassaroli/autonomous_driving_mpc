@@ -15,9 +15,8 @@ $a_x$ = longitudinal acceleration
 
 
 
-$\dot{x} = v_x * cos(\phi)$    
-$\dot{y} = v_x * sin(\phi)$    
+$\dot{x} = v_x cos(\phi)$    
+$\dot{y} = v_x sin(\phi)$    
 $\dot{\delta} = v_{\delta}$  
 $\dot{v_x}= a_x$  
-
-$\dot{\phi}= \frac{v_x}{l_{wb} * tan(\delta)}$  
+$\dot{\phi}= \frac{v_x}{l_{wb}} tan(\delta)$  
