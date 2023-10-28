@@ -2,12 +2,12 @@
 Model Predictive Controller (MPC) for self driving car.
 
 ## States
-*x* = x position in a global coordinate system
-*y* = y position in a global coordinate system
-*delta* = steering angle of front wheels
-*v_x* = velocity in x-direction
-*phi* = yaw angle
-*l_wb* = vehicle wheelbase 
+*x* = x position in a global coordinate system  
+*y* = y position in a global coordinate system  
+*delta* = steering angle of front wheels  
+*v_x* = velocity in x-direction  
+*phi* = yaw angle  
+*l_wb* = vehicle wheelbase  
 
 *v_delta* = _steering angle velocity of front wheels_
 *a_x* = _longitudinal acceleration_
