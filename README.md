@@ -11,7 +11,9 @@ Model Predictive Controller (MPC) for self driving car.
 
 *v_delta* = steering angle velocity of front wheels  
 *a_x* = longitudinal acceleration  
-<img src="https://latex.codecogs.com/gif.latex? v_x =\text { longitudinal acceleration }  " /> 
+
+$' a_x '$ = longitudinal acceleration  
+
 
 
 *x_dot = v_x * cos(phi)*  
