@@ -38,10 +38,8 @@ x_next_mapping = Function('x_next_mapping', [pred_model.x,pred_model.u], [x_next
 simulation_model = x_next_mapping.mapaccum(N)
 
 ## Run a simulation trial
-# U = cos([linspace(2,N,N), linspace(2,N,N)])   # control input series
 v_delta = np.concatenate((linspace(0.01, 0, int(N/2)), linspace(0, -0.01, int(N/2))), axis = None)
 U = np.array([v_delta, ones(N)])
-# U = np.array([ones(N)+1, zeros(N)+np.deg2rad(250)])
 
 sim_res = simulation_model(pred_model.x0, U)
 velocity_state_evolution = np.array(sim_res[3,:])
@@ -53,7 +51,7 @@ print(sim_res)
 ## Plot results
 t_grid = linspace(0, T, N)
 fig = plt.figure()
-plt.title("open loop prediciton model simulation")
+plt.title("Model simulation")
 ax1 = fig.add_subplot(221)
 ax1.set_title("control inputs")
 ax1.set_ylabel('acceleration [m/s²]', color='r')

@@ -74,6 +74,5 @@ def bicycle_model():
     model.z = z
     model.p = p
     model.name = model_name
-    # model.params = params
     
     return model
