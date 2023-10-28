@@ -1,4 +1,4 @@
-# autonomous_driving_mpc
+# MPC for Self Driving Cars
 Model Predictive Controller (MPC) for self driving car.
 
 ## States
