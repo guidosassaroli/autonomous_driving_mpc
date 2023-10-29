@@ -38,7 +38,8 @@ x_next_mapping = Function('x_next_mapping', [pred_model.x,pred_model.u], [x_next
 simulation_model = x_next_mapping.mapaccum(N)
 
 ## Run a simulation trial
-v_delta = np.concatenate((linspace(0.01, 0, int(N/2)), linspace(0, -0.01, int(N/2))), axis = None)
+v_delta = np.concatenate((linspace(0, 0.01, int(N/2)), linspace(0.01, 0, int(N/2))), axis = None)
+
 U = np.array([v_delta, ones(N)])
 
 sim_res = simulation_model(pred_model.x0, U)
@@ -48,47 +49,47 @@ velocity_state_evolution = velocity_state_evolution.reshape(-1)
 print('Simulation results:')
 print(sim_res)
 
-## Plot results
+## Plot result 
+
 t_grid = linspace(0, T, N)
-fig = plt.figure()
-plt.title("Model simulation")
-ax1 = fig.add_subplot(221)
-ax1.set_title("control inputs")
-ax1.set_ylabel('acceleration [m/s²]', color='r')
-ax1.step(t_grid, U[1,:], color='r')
-ax1.tick_params(axis ='y', labelcolor = 'r')
 
-ax1t = ax1.twinx()
-ax1t.set_ylabel('steering velocity [°/s]', color='g')
-ax1t.step(t_grid, np.rad2deg(U[0,:]), color='g')
-ax1t.tick_params(axis ='y', labelcolor = 'g')
-ax1.grid(True)
+plt.figure('States')
+plt.subplot(221)
+plt.plot(t_grid, U[0,:], 'b')
+ax = plt.gca()
+plt.xlabel('time [s]')
+plt.ylabel('Steering rate')
+plt.grid(axis='both')
 
-
-ax2 = fig.add_subplot(222)
-ax2.set_title("position evolution")
-ax2.plot(np.array(sim_res[0,:]).reshape(-1), np.array(sim_res[1,:]).reshape(-1))
-ax2.set_ylabel('y [m]')
-ax2.yaxis.tick_right()
-ax2.yaxis.set_label_position("right")
-ax2.set_xlabel('x [m]')
-ax2.grid(True)
+plt.subplot(222)
+plt.plot(t_grid, U[1,:], 'r')
+ax = plt.gca()
+plt.xlabel('time [s]')
+plt.ylabel('Longitudinal acceleration')
+plt.grid(axis='both')
 
 plt.subplot(223)
-plt.title("velocity")
-plt.plot(t_grid, np.array(sim_res[3,:]).reshape(-1))
-plt.ylabel('v [m/s]')
-plt.xlabel('t [s]')
-plt.grid(True)
+plt.plot(t_grid, np.array(sim_res[3,:]).reshape(-1), 'b')
+ax = plt.gca()
+plt.xlabel('time [s]')
+plt.ylabel('longitudinal velocity [m/s]')
+plt.grid(axis='both')
 
-ax3 = fig.add_subplot(224)
-ax3.set_title("orientation")
-ax3.plot(t_grid, np.rad2deg((np.array(sim_res[4,:]).reshape(-1)+np.pi)%(2*np.pi)-np.pi))
-ax3.set_ylabel('yaw [°]')
-ax3.yaxis.tick_right()
-ax3.yaxis.set_label_position("right")
-ax3.set_xlabel('t [s]')
-ax3.grid(True)
+plt.subplot(224)
+plt.plot(t_grid, np.rad2deg((np.array(sim_res[4,:]).reshape(-1)+np.pi)%(2*np.pi)-np.pi), 'b')
+ax = plt.gca()
+plt.xlabel('time [s]')
+plt.ylabel('yaw angle [°]')
+plt.grid(axis='both')
 
-fig.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.show()
+
+
+plt.figure('Driven trajectory')
+plt.plot(np.array(sim_res[0,:]).reshape(-1), np.array(sim_res[1,:]).reshape(-1), 'b')
+# plt.plot(sim_res[0,:], sim_res[1,:], 'b')
+ax = plt.gca()
+plt.xlabel('x pos [m]')
+plt.ylabel('y pos [m]')
+plt.grid(axis='both')
 plt.show()

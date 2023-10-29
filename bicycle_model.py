@@ -22,7 +22,7 @@ def bicycle_model():
 
     #parameters 
 
-    l_wb = 4    # wheel base [m]
+    l_wb = 3.5    # wheel base [m]
 
     
     # x : states
