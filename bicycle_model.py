@@ -28,8 +28,8 @@ def bicycle_model():
     # x : states
     x1 = SX.sym('x1') # x position in a global coordinate system
     x2 = SX.sym('x2') # y position in a global coordinate system
-    x3 = SX.sym('x3') # delta: steering angle of front wheels
-    x4 = SX.sym('x4') # velocity in x-direction
+    x3 = SX.sym('x3') # steering angle of front wheels
+    x4 = SX.sym('x4') # linear velocity
     x5 = SX.sym('x5') # yaw angle
 
     x = vertcat(x1, x2, x3, x4, x5)
@@ -55,7 +55,7 @@ def bicycle_model():
     # parameters
     p = vertcat([])
 
-    model.x0 = np.array([0.001, 0, 0, 0, 0])
+    model.x0 = np.array([0, 0, 0.1, 10, 0])
 
 
     f1 = x4 * cos(x5)

@@ -39,8 +39,9 @@ simulation_model = x_next_mapping.mapaccum(N)
 
 ## Run a simulation trial
 v_delta = np.concatenate((linspace(0, 0.01, int(N/2)), linspace(0.01, 0, int(N/2))), axis = None)
+v_delta = 0.05*ones(N)
 
-U = np.array([v_delta, ones(N)])
+U = np.array([v_delta*0, ones(N)*0])
 
 sim_res = simulation_model(pred_model.x0, U)
 velocity_state_evolution = np.array(sim_res[3,:])
