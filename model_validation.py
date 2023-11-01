@@ -2,6 +2,7 @@ from casadi import *
 import numpy as np
 import matplotlib.pyplot as plt
 from pylab import *
+import pandas as pd 
 
 from bicycle_model import bicycle_model
 
@@ -50,8 +51,7 @@ velocity_state_evolution = velocity_state_evolution.reshape(-1)
 print('Simulation results:')
 print(sim_res)
 
-## Plot result 
-
+## ------------------ Plot result ----------------------------
 t_grid = linspace(0, T, N)
 
 plt.figure('States')
@@ -94,3 +94,14 @@ plt.xlabel('x pos [m]')
 plt.ylabel('y pos [m]')
 plt.grid(axis='both')
 plt.show()
+
+
+# ---------------- Save datas: sim_res, U, t ------------------------------
+pos_x = np.array(sim_res[0,:]).reshape(-1)
+pos_y = np.array(sim_res[1,:]).reshape(-1)
+yaw = np.array(sim_res[4,:]).reshape(-1)
+
+data = np.column_stack((pos_x, pos_y, yaw))
+df = pd.DataFrame(data = data.astype(float))
+df.to_csv('generated_trajectory.csv', sep=',', header = False, float_format='%.5f', index = False)
+
