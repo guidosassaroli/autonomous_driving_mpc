@@ -13,12 +13,15 @@ y_ref = simX[:,1]
 yaw_ref = simX[:,2]
 # v_ref = ref_traj_set['ref_v']
 
+ref_trajectory = [x_ref, y_ref, yaw_ref]
+
 # Define symbolic variables and parameters as before
 
 # MPC parameters
 N = 10  # Prediction horizon
 Q = np.diag([1, 1, 0.1, 0.1])  # State cost matrix
 R = 0.01  # Control cost
+num_steps = 10
 
 # Define decision variables over the prediction horizon
 X = ca.MX.sym('X', 4, N+1)  # State variables
@@ -30,11 +33,11 @@ X_vec = ca.reshape(X, -1, 1)
 # Define the cost function
 cost = 0
 for k in range(N):
-    cost += ca.mtimes([(X[:, k] - reference_state).T, Q, (X[:, k] - reference_state)]) + R * (U[:, k]**2)
+    cost += ca.mtimes([(X[:, k] - ref_trajectory).T, Q, (X[:, k] - ref_trajectory)]) + R * (U[:, k]**2)
 
 # Define the optimization problem
 g = []
-g += [X[:, 0] - initial_state]  # Initial state constraint
+g += [X[:, 0] - x_ref[:]]  # Initial state constraint
 for k in range(N):
     x_next = ca.rhs_func(0, *X[:, k], U[:, k])
     g += [X[:, k+1] - x_next]
@@ -44,8 +47,8 @@ opts = {'ipopt.print_level': 0, 'print_time': 0, 'ipopt.tol': 1e-4, 'ipopt.hessi
 solver = ca.nlpsol('solver', 'ipopt', nlp, opts)
 
 # MPC control loop
-state = initial_state
-steering = initial_steering
+state = [x_ref[0], y_ref[0], 0, 0, 0]
+steering = 0
 reference_state = [10, 2, 0, 5]  # Desired final state
 
 for step in range(num_steps):
