@@ -1,7 +1,17 @@
 import casadi as ca
 import numpy as np
+import json 
 
 # -------------------- MPC DEFINITION ---------------------------
+
+# Load reference trajectory 
+X = np.genfromtxt("/home/guido/autonomous_driving_mpc/generated_trajectory.csv",delimiter=",",dtype=None)
+simX = X[:, [0, 1, 2]]
+
+x_ref = simX[:,0]
+y_ref = simX[:,1]
+yaw_ref = simX[:,2]
+# v_ref = ref_traj_set['ref_v']
 
 # Define symbolic variables and parameters as before
 
