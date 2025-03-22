@@ -13,7 +13,12 @@ y_ref = simX[:,1]
 yaw_ref = simX[:,2]
 # v_ref = ref_traj_set['ref_v']
 
-ref_trajectory = [x_ref, y_ref, yaw_ref]
+# ref_trajectory = [x_ref, y_ref, yaw_ref]
+ref_trajectory = ca.MX(x_ref), ca.MX(y_ref), ca.MX(yaw_ref)
+ref_trajectory = ca.vertcat(*ref_trajectory)
+
+
+
 
 # Define symbolic variables and parameters as before
 
@@ -22,6 +27,7 @@ N = 10  # Prediction horizon
 Q = np.diag([1, 1, 0.1, 0.1])  # State cost matrix
 R = 0.01  # Control cost
 num_steps = 10
+
 
 # Define decision variables over the prediction horizon
 X = ca.MX.sym('X', 4, N+1)  # State variables
@@ -32,8 +38,11 @@ X_vec = ca.reshape(X, -1, 1)
 
 # Define the cost function
 cost = 0
+# for k in range(N):
+#     cost += ca.mtimes([(X[:, k] - ref_trajectory).T, Q, (X[:, k] - ref_trajectory)]) + R * (U[:, k]**2)
 for k in range(N):
-    cost += ca.mtimes([(X[:, k] - ref_trajectory).T, Q, (X[:, k] - ref_trajectory)]) + R * (U[:, k]**2)
+    cost += ca.mtimes([(X[:, k] - ref_trajectory[:, k]).T, Q, (X[:, k] - ref_trajectory[:, k])]) + R * (U[:, k]**2)
+    
 
 # Define the optimization problem
 g = []
